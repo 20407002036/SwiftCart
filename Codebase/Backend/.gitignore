@@ -1,0 +1,19 @@
+SwiftCart/.env
+SwiftCart/db.sqlite3
+swift
+
+
+# Django
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+!media/default_images/
+!media/default_images/avatar.png
+# Static files
+/static/
+*/static/

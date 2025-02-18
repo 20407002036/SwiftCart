@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # External Apps
     'rest_framework',
     'Items',
+    'account',
 ]
 
 MIDDLEWARE = [
