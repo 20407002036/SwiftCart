@@ -3,6 +3,8 @@ from .models import User
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 from django.contrib.auth.hashers import make_password
+
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -32,7 +34,7 @@ class LoginUserSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
-        token["username"] = user.Email
+        token["Email"] = user.Email
         return token
     def validate(self, attrs):
         data = super().validate(attrs)

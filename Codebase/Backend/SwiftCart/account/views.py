@@ -36,7 +36,6 @@ class RegisterUserView(GenericAPIView):
                 )
         
 class LoginUserView(TokenObtainPairView):
-
     serializer_class = LoginUserSerializer
 
 
