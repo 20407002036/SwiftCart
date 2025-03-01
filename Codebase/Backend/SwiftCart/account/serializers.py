@@ -8,12 +8,25 @@ from django.contrib.auth.hashers import make_password
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["id", "FirstName", "LastName", "Email", "password", "password2"]
+        fields = ["id", "FirstName", "LastName", "Email", "password"]
+        extra_kwargs = {
+            'password': {'write_only': True}
+        }
 
 
     def validate(self, data):
-        if data["password"] != data.get("password2"):
-            raise serializers.ValidationError({"Password": "Passwords do not match."})
+        # This to be done on the Fronetend
+        # if data["password"] != data.get("password2"):
+        #     raise serializers.ValidationError({"Password": "Passwords do not match."})
+        email = data.get('Email')
+        if User.objects.filter(Email=email).exists():
+            raise serializers.ValidationError({"Email": "Email already exists"})
+        
+        required_fields = ['Email', 'password', 'FirstName', 'LastName']
+        for field in required_fields:
+            if not data.get(field):
+                raise serializers.ValidationError({field: f"{field} is required"})
+            
         password = data.get("password")
         if len(password) < 8:
             raise serializers.ValidationError({"Password": "Password must be at least 8 characters."})
@@ -22,22 +35,29 @@ class UserSerializer(serializers.ModelSerializer):
     
 
     def create(self, validated_data):
-        validated_data.pop("password2")
-        password = validated_data.pop("password")
-        user = User(**validated_data)
-        user.password = make_password(password)
-        user.save()
+        # Harshed pass
+        validated_data['password'] = make_password(validated_data.get('password'))
+        user = User.objects.create(**validated_data)
         return user
     
 
 class LoginUserSerializer(TokenObtainPairSerializer):
+    username_field='Email'
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
         token["Email"] = user.Email
         return token
     def validate(self, attrs):
+        attrs['username'] = attrs.get('Email')
         data = super().validate(attrs)
+
+        data['user'] = {
+            'id': str(self.user.id),
+            'Email': self.user.Email,
+            'FirstName': self.user.FirstName,
+            'LastName': self.user.LastName,
+        }
         data["message"] = "Login was successful"
         return data
 

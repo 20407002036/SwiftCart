@@ -2,7 +2,6 @@ SwiftCart/.env
 SwiftCart/db.sqlite3
 swift
 
-
 # Django
 *.log
 *.pot

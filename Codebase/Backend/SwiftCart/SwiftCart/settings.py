@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 from dotenv import load_dotenv
 import os
+from datetime import timedelta
 
 load_dotenv()
 
@@ -43,11 +44,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # External Apps
     'rest_framework',
+    'corsheaders',
+    # Internal Apps
     'Items',
     'account',
+    'products'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -88,7 +93,7 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
 
         # For Desployment
-
+        #
         # 'ENGINE': 'django.db.backends.postgresql',
         # 'NAME': os.getenv('SWIFTDBNAME'),
         # 'USER': os.getenv('SWIFTDBUSER'),
@@ -146,6 +151,30 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ]
 }
+
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173", # Localhost Frontend URL
+    "http://fronenddomain", # deplyed Frontend URL
+]
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+SIMPLE_JWT ={
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+}
+
+AUTH_USER_MODEL = 'account.User'
+
+CORS_ALLOWED_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]

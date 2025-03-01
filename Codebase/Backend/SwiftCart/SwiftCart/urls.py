@@ -17,12 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from Items.views import ItemsListView
-from account.views import RegisterUserView
 
 api_url_patterns = [
     path("items/", include("Items.urls", namespace="items")),
     path("account/", include("account.urls", namespace="account")),
+    path("products/", include("products.urls", namespace="products")),
 ]
 
 urlpatterns = [
