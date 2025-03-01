@@ -1,4 +1,4 @@
-SwiftCart/.env
+
 SwiftCart/db.sqlite3
 swift
 
@@ -16,3 +16,8 @@ media/
 # Static files
 /static/
 */static/
+
+
+
+
+SwiftCart/.env
