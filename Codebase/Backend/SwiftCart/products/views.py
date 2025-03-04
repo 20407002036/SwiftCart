@@ -18,6 +18,7 @@ class ProductViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(category=category)
 
         serializer = self.get_serializer(queryset, many=True)
+        print(serializer.data)
         return Response(serializer.data)
 
     @action(detail=False, methods=['GET'])

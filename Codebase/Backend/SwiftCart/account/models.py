@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 import uuid
+import random
 
 class UserManager(BaseUserManager):
     def create_user(self, Email, password=None, **extra_fields):
@@ -23,6 +24,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     Customer = models.BooleanField(default=True)
+    is_verified = models.BooleanField(default=False)
+    verification_code = models.CharField(max_length=6, null=True, blank=True)
 
     objects = UserManager()
 
@@ -31,6 +34,10 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.Email
+    
+    def generate_verification_code(self):
+        self.verification_code = str(random.randint(100000, 999999))
+        self.save()
 
     class Meta:
         db_table = 'users'

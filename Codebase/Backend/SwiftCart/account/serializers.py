@@ -3,6 +3,8 @@ from .models import User
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 from django.contrib.auth.hashers import make_password
+from django.core.mail import send_mail
+import os
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -38,8 +40,23 @@ class UserSerializer(serializers.ModelSerializer):
         # Harshed pass
         validated_data['password'] = make_password(validated_data.get('password'))
         user = User.objects.create(**validated_data)
+        user.is_active=False
+        user.generate_verification_code()
+
+        #Send Email
+        send_mail(
+            'SwiftCart Account Verification',
+            f'Your verification code is {user.verification_code}',
+            os.getenv('EMAIL_HOST_USER'),
+            [user.Email],
+            fail_silently=False,
+        )
         return user
     
+
+class VerifyEmailSerializer(serializers.Serializer):
+    Email = serializers.EmailField()
+    verification_code = serializers.CharField(max_length=6)
 
 class LoginUserSerializer(TokenObtainPairSerializer):
     username_field='Email'

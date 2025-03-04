@@ -5,9 +5,11 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import status
+from rest_framework.views import APIView
+from .models import User
 
 # Create your views here.
-from .serializers import UserSerializer, LoginUserSerializer, LogoutSerializer
+from .serializers import UserSerializer, LoginUserSerializer, LogoutSerializer, VerifyEmailSerializer
 from .comms import Comms
 
 accountComms = Comms()
@@ -28,7 +30,8 @@ class RegisterUserView(GenericAPIView):
                 }
                 data["message"] = "User created successfully"
                 # Email logic
-                accountComms.send_email(data["Email"], data["message"], "A SwiftCart account has been Created Successfully. /n Happy Shopping! ")
+                accountComms.send_email(data["Email"], data["message"], "A SwiftCart account has been Created Successfully. " +
+                                        "Happy Shopping! ")
                 return Response(data, status=status.HTTP_201_CREATED)
         
             else:
@@ -46,6 +49,28 @@ class RegisterUserView(GenericAPIView):
                 "error": str(e)
             }, status=status.HTTP_400_BAD_REQUEST)
         
+
+class VerifyEmailView(GenericAPIView):
+    serializer_class = VerifyEmailSerializer
+
+    def post(self, request):
+        email = request.data.get("Email")
+        verification_code = request.data.get("verification_code")
+
+        try:
+            user = User.objects.get(Email=email)
+            if user.verification_code == verification_code:
+                user.is_verified = True
+                user.is_active = True
+                user.verification_code = None
+                user.save()
+                return Response({"message": "Email verified successfully"}, status=status.HTTP_200_OK)
+            else:
+                return Response({"message": "Invalid verification code"}, status=status.HTTP_400_BAD_REQUEST)
+        except User.DoesNotExist:
+            return Response({"message": "User not found"}, status=status.HTTP_404_NOT_FOUND)
+        
+
 class LoginUserView(TokenObtainPairView):
     serializer_class = LoginUserSerializer
 
