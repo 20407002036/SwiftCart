@@ -17,8 +17,10 @@ export interface CartItem extends Product {
 }
 
 export var products: Product[] = []
-var producsdataAPI = await productAPI.getAll()
-var producsdataAPILength = producsdataAPI.length
+var producsdataAPI;
+// producsdataAPI = await productAPI.getAll()
+var producsdataAPILength = 0
+// producsdataAPILength = producsdataAPI.length
 
 
 // JS funstions to check is the productdataAPI has null value, or is empty, or giving a bad response
@@ -87,7 +89,7 @@ if(producsdataAPILength < 1){
       name: "Samsung 65\" QLED TV",
       price: 1299.99,
       image: "https://images.unsplash.com/photo-1593784991095-a205069470b6?w=500&q=80",
-      category: "tvs",
+      category: "electronics",
       description: "4K Ultra HD Smart TV with Quantum Processor",
       specs: {
         "Resolution": "4K Ultra HD",
@@ -103,7 +105,7 @@ if(producsdataAPILength < 1){
       name: "Nike Air Max",
       price: 129.99,
       image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80",
-      category: "fashion",
+      category: "clothing",
       description: "Classic running shoes with Air cushioning",
       specs: {
         "Material": "Mesh and synthetic",
@@ -119,7 +121,7 @@ if(producsdataAPILength < 1){
       name: "PlayStation 5",
       price: 499.99,
       image: "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=500&q=80",
-      category: "gaming",
+      category: "electronics",
       description: "Next-gen gaming console with 4K graphics",
       specs: {
         "Storage": "825GB SSD",
@@ -135,7 +137,7 @@ if(producsdataAPILength < 1){
       name: "MacBook Pro 14\"",
       price: 1999.99,
       image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80",
-      category: "computing",
+      category: "electronics",
       description: "Powerful laptop with M2 Pro chip",
       specs: {
         "Processor": "M2 Pro",
@@ -151,7 +153,7 @@ if(producsdataAPILength < 1){
       name: "Dyson Air Purifier",
       price: 399.99,
       image: "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=500&q=80",
-      category: "appliances",
+      category: "electronics",
       description: "HEPA air purifier with smart features",
       specs: {
         "Coverage": "400 sq ft",
@@ -166,5 +168,16 @@ if(producsdataAPILength < 1){
 }
 else{
   // Make the values of the API be the Products
-  // products = producsdataAPI
+  // products = 
+    // producsdataAPI.map((product: any) => ({
+    //   id: product.id,
+    //   name: product.name,
+    //   price: parseInt(product.price, 10),
+    //   image: product.image,
+    //   category: product.category,
+    //   description: product.description,
+    //   specs: product.specs,
+    //   images: product.images
+    // }))
+  
 }

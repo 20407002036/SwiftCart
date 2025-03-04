@@ -65,7 +65,7 @@ export function CheckoutPage() {
     // Simulate payment processing
     await new Promise(resolve => setTimeout(resolve, 2000));
 
-    // Clear cart and redirect to success page
+    // Clear cart and redirect to success page send Email for order confirmation  
     dispatch({ type: "CLEAR_CART" });
     navigate("/checkout/success");
   };

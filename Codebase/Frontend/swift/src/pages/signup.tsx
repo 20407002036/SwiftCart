@@ -28,7 +28,7 @@ export function SignupPage() {
         formData.firstName,
         formData.lastName
       );
-      navigate('/', { replace: true });
+      navigate('/verify-email', { replace: true });
     } catch (error) {
       setError('Failed to create account');
     } finally {

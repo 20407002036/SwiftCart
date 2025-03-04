@@ -22,6 +22,13 @@ export const auth = {
       password: password });
     return data;
   },
+  verifyEmail: async (email: string, verificationCode: string) => {
+    const { data } = await api.post('/account/auth/verifyemail/', {
+      Email: email,
+      VerificationCode: verificationCode,
+    });
+    return data;
+  },
   signup: async (email: string, password: string, firstName: string, lastName: string) => {
     const { data } = await api.post('/account/auth/signup/', { 
       Email : email,
@@ -44,7 +51,7 @@ export const auth = {
 // Products API
 export const products = {
   getAll: async () => {
-    const { data } = await api.get('/products');
+    const { data } = await api.get('/products/');
     return data;
   },
   getById: async (id: string) => {

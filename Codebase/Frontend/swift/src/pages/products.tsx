@@ -10,6 +10,7 @@ const categories = [
   { id: "clothing", name: "Clothing" },
   { id: "accessories", name: "Accessories" },
   { id: "home", name: "Home & Living" },
+  { id: "phones", name: "Phones" },
 ];
 
 const sortOptions = [

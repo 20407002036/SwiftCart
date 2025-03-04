@@ -8,6 +8,7 @@ import { CheckoutPage } from '@/pages/checkout';
 import { CheckoutSuccessPage } from '@/pages/checkout-success';
 import { LoginPage } from '@/pages/login';
 import { SignupPage } from '@/pages/signup';
+import { VerifyEmailPage } from '@/pages/verify-email';
 import { AccountPage } from '@/pages/account';
 import { CartProvider } from '@/lib/cart';
 import { AuthProvider } from '@/lib/auth';
@@ -44,6 +45,7 @@ function App() {
                 />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/signup" element={<SignupPage />} />
+                <Route path="/verify-email" element={<VerifyEmailPage />} />
                 <Route
                   path="/account"
                   element={
