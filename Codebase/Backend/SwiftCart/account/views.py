@@ -55,8 +55,7 @@ class VerifyEmailView(GenericAPIView):
 
     def post(self, request):
         email = request.data.get("Email")
-        verification_code = request.data.get("verification_code")
-
+        verification_code = request.data.get("VerificationCode")
         try:
             user = User.objects.get(Email=email)
             if user.verification_code == verification_code:
