@@ -44,9 +44,9 @@ export function CartPage() {
                       <h3>
                         <Link to={`/product/${item.id}`}>{item.name}</Link>
                       </h3>
-                      <p className="ml-4">${(item.price * item.quantity).toFixed(2)}</p>
+                      <p className="ml-4">Ksh. {(item.price * item.quantity).toFixed(2)}</p>
                     </div>
-                    <p className="mt-1 text-sm text-gray-500">${item.price.toFixed(2)} each</p>
+                    <p className="mt-1 text-sm text-gray-500">Ksh. {item.price.toFixed(2)} each</p>
                   </div>
                   <div className="flex flex-1 items-end justify-between text-sm">
                     <div className="flex items-center gap-2">
@@ -103,11 +103,11 @@ export function CartPage() {
           <dl className="mt-6 space-y-4">
             <div className="flex items-center justify-between">
               <dt className="text-sm text-gray-600">Subtotal</dt>
-              <dd className="text-sm font-medium text-gray-900">${total.toFixed(2)}</dd>
+              <dd className="text-sm font-medium text-gray-900">Ksh. {total.toFixed(2)}</dd>
             </div>
             <div className="flex items-center justify-between border-t border-gray-200 pt-4">
               <dt className="text-base font-medium text-gray-900">Order total</dt>
-              <dd className="text-base font-medium text-gray-900">${total.toFixed(2)}</dd>
+              <dd className="text-base font-medium text-gray-900">Ksh. {total.toFixed(2)}</dd>
             </div>
           </dl>
 

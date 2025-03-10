@@ -89,7 +89,7 @@ export function ProductPage() {
           </div>
 
           <p className="mt-6 text-xl font-medium text-gray-900">
-            ${product.price.toFixed(2)}
+            Ksh. {product.price.toFixed(2)}
           </p>
 
           <div className="mt-6">
@@ -143,7 +143,7 @@ export function ProductPage() {
           <div className="mt-8 space-y-4">
             <div className="flex items-center gap-3 text-sm text-gray-600">
               <Truck className="h-5 w-5" />
-              <span>Free shipping on orders over $100</span>
+              <span>Free shipping on orders over Ksh. 10,000</span>
             </div>
             <div className="flex items-center gap-3 text-sm text-gray-600">
               <Shield className="h-5 w-5" />

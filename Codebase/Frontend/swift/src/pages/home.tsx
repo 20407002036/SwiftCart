@@ -14,13 +14,13 @@ const featuredProducts = [
     image: "https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=500&q=80"
   },
   {
-    id: "3",
+    id: "9",
     name: "Premium Backpack",
     price: 89.99,
     image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500&q=80"
   },
   {
-    id: "4",
+    id: "10",
     name: "Smart Water Bottle",
     price: 39.99,
     image: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=500&q=80"

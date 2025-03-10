@@ -25,7 +25,7 @@ export function ProductCard({ id, name, price, image }: ProductCardProps) {
         <Link to={`/product/${id}`}>
           <h3 className="text-sm font-medium text-gray-900">{name}</h3>
         </Link>
-        <p className="mt-1 text-sm font-medium text-gray-900">${price}</p>
+        <p className="mt-1 text-sm font-medium text-gray-900">Ksh. {price}</p>
       </div>
     </div>
   );
