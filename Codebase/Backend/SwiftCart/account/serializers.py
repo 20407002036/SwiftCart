@@ -74,6 +74,7 @@ class LoginUserSerializer(TokenObtainPairSerializer):
             'Email': self.user.Email,
             'FirstName': self.user.FirstName,
             'LastName': self.user.LastName,
+            'is_staff': self.user.is_staff,
         }
         data["message"] = "Login was successful"
         return data

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Product } from './data';
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8000/api',
+  baseURL:'http://localhost:8000/api',
 });
 
 // Add auth token to requests
@@ -25,7 +25,7 @@ export const auth = {
   verifyEmail: async (email: string, verificationCode: string) => {
     const { data } = await api.post('/account/auth/verifyemail/', {
       Email: email,
-      VerificationCode: verificationCode,
+      VerificationCode: verificationCode
     });
     return data;
   },

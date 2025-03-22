@@ -19,7 +19,8 @@ export function VerifyEmailPage() {
     setIsSubmitting(true);
 
     try{
-        await auth.verifyEmail(email, verificationCode);
+      const token = localStorage.getItem('token');
+        await auth.verifyEmail(email, verificationCode, token);
         setIsVerified(true);
     } catch (error){
         setError('Invalid email or password');

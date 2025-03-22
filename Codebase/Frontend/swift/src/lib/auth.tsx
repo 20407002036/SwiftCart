@@ -6,6 +6,7 @@ interface User {
   Email: string;
   FirstName?: string;
   LastName?: string;
+  is_staff: boolean;
 }
 
 interface AuthContextType {

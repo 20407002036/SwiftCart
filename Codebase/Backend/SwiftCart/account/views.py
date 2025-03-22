@@ -7,6 +7,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import status
 from rest_framework.views import APIView
 from .models import User
+from rest_framework.permissions import AllowAny
 
 # Create your views here.
 from .serializers import UserSerializer, LoginUserSerializer, LogoutSerializer, VerifyEmailSerializer
@@ -52,10 +53,14 @@ class RegisterUserView(GenericAPIView):
 
 class VerifyEmailView(GenericAPIView):
     serializer_class = VerifyEmailSerializer
+    permission_classes = [AllowAny]
 
     def post(self, request):
+        print(request.data)
         email = request.data.get("Email")
-        verification_code = request.data.get("VerificationCode")
+        verification_code = request.data.get("verification_code")
+
+        print(request.data)
         try:
             user = User.objects.get(Email=email)
             if user.verification_code == verification_code:
